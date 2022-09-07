@@ -1,0 +1,18 @@
+[
+    {
+        "model": "nextapi.taskboard",
+        "pk":1,
+        "fields": {
+            "user": 1,
+            "name": "Morning Routine"
+        }
+    },
+    {
+        "model": "nextapi.taskboard",
+        "pk":2,
+        "fields": {
+            "user": 1,
+            "name": "Food List"
+        }
+    }
+]
