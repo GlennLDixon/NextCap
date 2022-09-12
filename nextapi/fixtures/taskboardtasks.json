@@ -1,0 +1,50 @@
+[
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":1,
+        "fields": {
+            "taskBoard": 1,
+            "task": 1
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":2,
+        "fields": {
+            "taskBoard": 1,
+            "task": 2
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":1,
+        "fields": {
+            "taskBoard": 2,
+            "task": 3
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":2,
+        "fields": {
+            "taskBoard": 2,
+            "task": 2
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":3,
+        "fields": {
+            "taskBoard": 2,
+            "task": 4
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":4,
+        "fields": {
+            "taskBoard": 1,
+            "task": 4
+        }
+    }
+]

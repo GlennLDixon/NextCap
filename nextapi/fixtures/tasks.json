@@ -1,0 +1,42 @@
+[
+    {
+        "model": "nextapi.task",
+        "pk":1,
+        "fields": {
+            "task": "Workout",
+            "dateCreated": "2022-10-12",
+            "isCompleted": true,
+            "timeStamp": "01:11:03"
+        }
+    },
+    {
+        "model": "nextapi.task",
+        "pk":2,
+        "fields": {
+            "task": "Cleanup",
+            "dateCreated": "2022-10-12",
+            "isCompleted": true,
+            "timeStamp": "00:46:03"
+        }
+    },
+    {
+        "model": "nextapi.task",
+        "pk":3,
+        "fields": {
+            "task": "Study",
+            "dateCreated": "2022-10-12",
+            "isCompleted": false,
+            "timeStamp": "00:31:03"
+        }
+    },
+    {
+        "model": "nextapi.task",
+        "pk":4,
+        "fields": {
+            "task": "Read 2 chapters",
+            "dateCreated": "2022-10-12",
+            "isCompleted": false,
+            "timeStamp": "01:46:03"
+        }
+    }
+]
