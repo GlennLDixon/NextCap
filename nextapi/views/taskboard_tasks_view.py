@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from nextapi.models import TaskBoardTask
 
 
-class TasksView(ViewSet):
+class MultiBoardTasksView(ViewSet):
     """Tasks Event View"""
 
     def retrieve(self, request, pk):
@@ -18,7 +18,7 @@ class TasksView(ViewSet):
         """
         try:
             task = TaskBoardTask.objects.get(pk=pk)
-            serializer = PostSerializer(task)
+            serializer = TaskSerializer(task)
             return Response(serializer.data)
         except TaskBoardTask.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
@@ -30,9 +30,18 @@ class TasksView(ViewSet):
             Response -- JSON serialized list of post
         """
         boardtasks = TaskBoardTask.objects.all()
-        = request.query_params.get('category', None)
-        if category is not None:
-            tasks = tasks.filter(category_id=category)
+        task = request.query_params.get('task', None)
+        taskboard = request.query_params.get('taskBoard', None)
+        if task and taskboard is not None:
+            boardtasks = boardtasks.filter(taskBoard_id=taskboard)
+            tasks = tasks.filter(task_id=task)
 
-        serializer = PostSerializer(tasks, many=True)
+        serializer = TaskSerializer(boardtasks, many=True)
         return Response(serializer.data)
+
+
+class TaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TaskBoardTask
+        fields = ('id', 'task', 'taskBoard')
