@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
+from nextapi.views.taskboard_tasks_view import MultiBoardTasksView
 from rest_framework import routers
 from nextapi.views import register_user, login_user
 from nextapi.views.tasks_view import TaskView
+from nextapi.views.taskboard_view import TaskBoardView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'tasks', TaskView, 'task')
+router.register(r'boardtasks', MultiBoardTasksView, 'boardtask')
+router.register(r'tasksboards', TaskBoardView, 'taskboards')
 
 urlpatterns = [
     path('', include(router.urls)),
