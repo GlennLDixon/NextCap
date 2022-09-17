@@ -19,7 +19,7 @@
         "model": "nextapi.taskboardtask",
         "pk":1,
         "fields": {
-            "taskBoard": 2,
+            "taskBoard": 3,
             "task": 3
         }
     },
@@ -27,7 +27,7 @@
         "model": "nextapi.taskboardtask",
         "pk":2,
         "fields": {
-            "taskBoard": 2,
+            "taskBoard": 3,
             "task": 2
         }
     },
@@ -35,8 +35,8 @@
         "model": "nextapi.taskboardtask",
         "pk":3,
         "fields": {
-            "taskBoard": 2,
-            "task": 4
+            "taskBoard": 4,
+            "task": 1
         }
     },
     {
@@ -44,7 +44,7 @@
         "pk":4,
         "fields": {
             "taskBoard": 1,
-            "task": 4
+            "task": 3
         }
     }
 ]

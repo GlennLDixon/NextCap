@@ -25,9 +25,11 @@ from nextapi.views.taskboard_view import TaskBoardView
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'tasks', TaskView, 'task')
 router.register(r'boardtasks', MultiBoardTasksView, 'boardtask')
-router.register(r'tasksboards', TaskBoardView, 'taskboards')
+router.register(r'taskboards', TaskBoardView, 'taskboards')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('register', register_user),
+    path('login', login_user)
 ]
