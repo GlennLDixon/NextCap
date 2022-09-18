@@ -45,6 +45,18 @@ class TaskBoardView(ViewSet):
         serializer = CreateTaskBoardSerializer(taskboard)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def update(self, request, pk):
+        """Handle PUT request for a task
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        taskBoard = TaskBoard.objects.get(pk=pk)
+        serializer = CreateTaskBoardSerializer(taskBoard, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
     def destroy(self, request, pk):
         """Delete Board"""
         taskboard = TaskBoard.objects.get(pk=pk)

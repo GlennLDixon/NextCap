@@ -1,10 +1,11 @@
 from django.http import HttpResponseServerError
+from nextapi.models.tasks import Task
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from nextapi.models import TaskBoardTask, taskboard
+from nextapi.models import TaskBoardTask, TaskBoard
 
 
 class MultiBoardTasksView(ViewSet):
@@ -38,6 +39,20 @@ class MultiBoardTasksView(ViewSet):
 
         serializer = TaskSerializer(boardtasks, many=True)
         return Response(serializer.data)
+
+    def create(self, request, pk):
+        """Handle  operations
+        Returns:
+            Response -- JSON serialized event instance
+        """
+        taskboard = TaskBoard.objects.get(pk=pk)
+        task = Task.objects.get(pk=pk)
+        joinedTask = TaskBoardTask.objects.create(
+            task=task,
+            taskBoard=taskboard
+        )
+        serializer = CreateTaskSerializer(joinedTask)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk):
         """Handle PUT request for a multi board task
