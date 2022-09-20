@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from nextapi.models import TaskBoardTask, TaskBoard
+from nextapi.models import TaskBoardTask, TaskBoard, taskboard, taskboardtasks
 
 
 class MultiBoardTasksView(ViewSet):
@@ -40,31 +40,17 @@ class MultiBoardTasksView(ViewSet):
         serializer = TaskSerializer(boardtasks, many=True)
         return Response(serializer.data)
 
-    def create(self, request, pk):
+    def create(self, request):
         """Handle  operations
         Returns:
             Response -- JSON serialized event instance
         """
-        taskboard = TaskBoard.objects.get(pk=pk)
-        task = Task.objects.get(pk=pk)
-        joinedTask = TaskBoardTask.objects.create(
-            task=task,
-            taskBoard=taskboard
-        )
-        serializer = CreateTaskSerializer(joinedTask)
+        task = Task.objects.get(pk=request.data["task_id"])
+        taskboard = TaskBoard.objects.get(pk=request.data["taskBoard_id"])
+        taskboardtask = TaskBoardTask.objects.create(
+            task=task, taskBoard=taskboard)
+        serializer = CreateTaskBoardTaskSerializer(taskboardtask)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def update(self, request, pk):
-        """Handle PUT request for a multi board task
-
-        Returns:
-            Response -- Empty body with 204 status code
-        """
-        taskboardtask = TaskBoardTask.objects.get(pk=pk)
-        serializer = CreateTaskSerializer(taskboardtask, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk):
         """Delete Board"""
@@ -80,8 +66,8 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ('id', 'task', 'taskBoard')
 
 
-class CreateTaskSerializer(serializers.ModelSerializer):
+class CreateTaskBoardTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TaskBoardTask
-        fields = ('id', 'task', 'taskBoard')
+        fields = ('id', 'task_id', 'taskBoard_id')
