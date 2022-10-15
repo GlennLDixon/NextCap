@@ -1,41 +1,9 @@
 [
     {
         "model": "nextapi.taskboardtask",
-        "pk":1,
-        "fields": {
-            "taskBoard": 1,
-            "task": 1
-        }
-    },
-    {
-        "model": "nextapi.taskboardtask",
-        "pk":2,
-        "fields": {
-            "taskBoard": 1,
-            "task": 2
-        }
-    },
-    {
-        "model": "nextapi.taskboardtask",
-        "pk":1,
-        "fields": {
-            "taskBoard": 3,
-            "task": 3
-        }
-    },
-    {
-        "model": "nextapi.taskboardtask",
-        "pk":2,
-        "fields": {
-            "taskBoard": 3,
-            "task": 2
-        }
-    },
-    {
-        "model": "nextapi.taskboardtask",
         "pk":3,
         "fields": {
-            "taskBoard": 4,
+            "taskBoard": 1,
             "task": 1
         }
     },
@@ -44,7 +12,23 @@
         "pk":4,
         "fields": {
             "taskBoard": 1,
+            "task": 2
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":5,
+        "fields": {
+            "taskBoard": 3,
             "task": 3
+        }
+    },
+    {
+        "model": "nextapi.taskboardtask",
+        "pk":6,
+        "fields": {
+            "taskBoard": 3,
+            "task": 2
         }
     }
 ]

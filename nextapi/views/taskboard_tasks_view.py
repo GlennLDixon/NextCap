@@ -5,7 +5,54 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from nextapi.models import TaskBoardTask, TaskBoard, taskboard, taskboardtasks
+from nextapi.models import TaskBoardTask, TaskBoard
+
+
+"""
+POST to 'create_shared_task'
+
+## Payload
+{
+
+    "task": "Buy California",
+    "dateCreated": "01/01/22:00:00:00",
+    "author": 1,
+    "boardIds": [2,3,4]
+}
+
+## Component
+const [newTask, setNewTask] = useState({
+    task: "",
+    dateCreated: new Date(),
+    author: user.id,
+    boardIds: []
+})
+
+const handleInput = useCallback((e) => {
+        e.preventDefault()
+        setNewTask({
+            ...newTask,
+            [e.target.name]: e.target.value,
+        })
+}, [setNewTask])
+
+const handleAddTaskClicked = () => {
+    createSharedTask(newTask)
+}
+
+<>
+    <input name="task" onInput={handleInput}/>
+    <select multiple name="boardIds" onInput={handleInput}>
+        {boards.map((board) => <option value={board.id}>{board.name}</option>}
+    </select>
+    <button onClick={handleAddTaskClicked}>Add Task</button>
+</>
+
+## Logic / Pseudo Code
+1. Create Task
+2. Save Task
+3. For each board_id in board_ids, create taskBoard record
+"""
 
 
 class MultiBoardTasksView(ViewSet):
@@ -45,8 +92,9 @@ class MultiBoardTasksView(ViewSet):
         Returns:
             Response -- JSON serialized event instance
         """
-        task = Task.objects.get(pk=request.data["task_id"])
-        taskboard = TaskBoard.objects.get(pk=request.data["taskBoard_id"])
+        # task = Task.objects.get(pk=request.data["task_id"])
+        task = Task.objects.get(pk=request.data["task"])
+        taskboard = TaskBoard.objects.get(pk=request.data["taskBoard"])
         taskboardtask = TaskBoardTask.objects.create(
             task=task, taskBoard=taskboard)
         serializer = CreateTaskBoardTaskSerializer(taskboardtask)
@@ -70,4 +118,4 @@ class CreateTaskBoardTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TaskBoardTask
-        fields = ('id', 'task_id', 'taskBoard_id')
+        fields = ('id', 'task', 'taskBoard')

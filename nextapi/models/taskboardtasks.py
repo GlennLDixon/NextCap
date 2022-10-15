@@ -4,5 +4,6 @@ from nextapi.models.tasks import Task
 
 
 class TaskBoardTask(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    taskBoard = models.ForeignKey(TaskBoard, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
+    taskBoard = models.ForeignKey(
+        TaskBoard, on_delete=models.CASCADE, null=True)
